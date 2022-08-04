@@ -2,9 +2,12 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import postRoutes from './routes/posts.js';
 
 const app = express();
 dotenv.config();
+
+app.use('/posts', postRoutes);
 
 app.use(express.json({ limit:"30mb", extended: true }));
 app.use(express.urlencoded({ limit:"30mb", extended: true }));
