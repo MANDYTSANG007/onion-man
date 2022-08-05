@@ -6,7 +6,7 @@ import Input from './Input';
 
 const Auth = () => {
     const [showPassword, setShowPassword] = useState(false);
-    const isSignup = true;
+    const [isSignup, setIsSignup] = useState(false);
 
     const handleSubmit = () => {
 
@@ -21,7 +21,8 @@ const Auth = () => {
     };
 
     const switchMode = () => {
-        
+        setIsSignup((prevIsSignup) => !prevIsSignup );
+        handleShowPassword(false);
     }
 
     return (
