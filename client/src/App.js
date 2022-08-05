@@ -1,39 +1,25 @@
-import React, { useEffect }from 'react';
-import { Container, AppBar, Typography, Grow, Grid } from '@mui/material';
-import Posts from './components/Posts/Posts';
-import Form from './components/Form/Form';
+import React from 'react';
+import { Container } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './styles';
-import { useDispatch } from 'react-redux';
-import { getPosts } from './actions/posts';
+import Navbar from './components/Navbar/Navbar';
+import Home from './components/Home/Home';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getPosts());
-  }, [dispatch]);
 
   return (
-    <ThemeProvider theme={theme}>
-    <Container sx={{bgcolor:"secondary.main" }} maxWidth="lg">
-      <AppBar sx={{bgcolor:"primary.main" }} position="static" color="inherit">
-        <Typography variant="h2" align="center">Onion Recipes</Typography>
-      </AppBar>
-      <Grow in>
-        <Container>
-          <Grid container justify="space-between" alignItems="stretch" spacing="3">
-            <Grid item xs={12} sm={7}>
-              <Posts />
-            </Grid>
-            <Grid item xs={12} sm={7}>
-              <Form />
-            </Grid>
-          </Grid>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <Container sx={{ bgcolor: "secondary.main" }} maxWidth="lg">
+          <Navbar />
+          <Routes>
+            <Route path="/" exact component={Home} />
+            <Route path="/auth" exact  />
+          </Routes>
         </Container>
-      </Grow>
-    </Container>
-    </ThemeProvider>
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }
 
