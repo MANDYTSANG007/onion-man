@@ -2,12 +2,15 @@ import React from 'react';
 import { Container, AppBar, Typography, Grow, Grid } from '@mui/material';
 import Posts from './components/Posts/Posts';
 import Form from './components/Form/Form';
+import { ThemeProvider } from '@mui/material/styles';
+import theme from './styles';
 
 
 function App() {
   return (
-    <Container maxWidth="lg">
-      <AppBar position="static" color="inherit">
+    <ThemeProvider theme={theme}>
+    <Container sx={{bgcolor:"secondary.main" }} maxWidth="lg">
+      <AppBar sx={{bgcolor:"primary.main" }} position="static" color="inherit">
         <Typography variant="h2" align="center">Onion Recipes</Typography>
       </AppBar>
       <Grow in>
@@ -23,6 +26,7 @@ function App() {
         </Container>
       </Grow>
     </Container>
+    </ThemeProvider>
   );
 }
 
