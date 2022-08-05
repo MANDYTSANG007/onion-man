@@ -8,7 +8,7 @@ const Form = () => {
     const [postData, setPostData] = useState({ creator: "", title: "", message: "", tags: "", selectedFile: "" });
     const dispatch = useDispatch();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         dispatch(createPost(postData));
