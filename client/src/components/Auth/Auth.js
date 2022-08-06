@@ -6,12 +6,14 @@ import { GoogleLogin } from '@react-oauth/google';
 import Icon from './icon';
 import { useDispatch } from 'react-redux';
 import jwt_decode from 'jwt-decode';
+import { useNavigate } from 'react-router-dom';
 
 
 const Auth = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [isSignup, setIsSignup] = useState(false);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleSubmit = () => {
 
@@ -37,7 +39,7 @@ const Auth = () => {
         console.log(userObject);
         try {
             dispatch({ type: "AUTH", data: {userObject, credential}});
-
+            navigate('/');
         } catch(error) {
             console.log(error);
         }
