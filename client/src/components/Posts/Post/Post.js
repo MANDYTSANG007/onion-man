@@ -6,7 +6,7 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import { useDispatch } from 'react-redux';
-import {deletePost } from '../../../actions/posts';
+import { deletePost, likePost } from '../../../actions/posts';
 
 
 const Post = ({ post, setCurrentId }) => {
@@ -36,8 +36,8 @@ const Post = ({ post, setCurrentId }) => {
                     <Typography variant="body2" color="white" component="p">{post.message}</Typography>
                 </CardContent>
                 <CardActions>
-                    <Button size="small" color="primary" onClick={()=> {}} disabled={!user?.userObject} >
-                        <Likes />
+                    <Button size="small" color="primary" disabled={!user?.userObject} onClick={()=> dispatch(likePost(post._id))}  >
+                        <ThumbUpAltIcon fontSize='small' /> &nbsp; Like &nbsp; {post.likeCount}
                     </Button>
                     <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}>
                         <DeleteIcon fontSize="small" />Delete
