@@ -3,6 +3,7 @@ import { AppBar, Typography, Avatar, Toolbar, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 
+
 const Navbar = () => {
 
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
@@ -10,6 +11,7 @@ const Navbar = () => {
 
     useEffect(() => {
         const credential = user?.credential;
+        
         setUser(JSON.parse(localStorage.getItem('profile')));
     }, []);
 
@@ -21,8 +23,8 @@ const Navbar = () => {
             <Toolbar>
                 {user ? (
                     <div>
-                        <Avatar alt={user.result.name} src={user.result.imageUrl}>{user.result.name.charAt(0)}</Avatar>
-                        <Typography variant="h6">{user.result.name}</Typography>
+                        <Avatar alt={user.userObject.name} src={user.userObject.imageUrl}>{user.userObject.name.charAt(0)}</Avatar>
+                        <Typography variant="h6">{user.userObject.name}</Typography>
                         <Button variant="contained" color="secondary">Logout</Button>
                     </div>
                 ): (
