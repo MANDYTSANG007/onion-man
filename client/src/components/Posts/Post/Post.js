@@ -15,7 +15,23 @@ const Post = ({ post, setCurrentId }) => {
     const dispatch = useDispatch();
 
     const Likes = () => {
-
+        if (post.likes.length > 0) {
+            return post.likes.find((like) => like === (user?.userObject?.googleId || user?.userObject?._id))
+                ? (
+                    <React.Fragment>
+                        <ThumbUpAltIcon fontSize="small" /> &nbsp;{post.likes.length > 2 ? `You and ${post.likes.length - 1} others` : `${post.likes.length} like${post.likes.length > 1 ? 's' : ""}`}
+                    </React.Fragment>
+                ) : (
+                    <React.Fragment>
+                        <ThumbUpAltIcon fontSize="small" /> &nbsp;{post.likes.length} {post.likes.length === 1 ? 'Like' : 'Likes'}
+                    </React.Fragment>
+                )
+        }
+        return (
+            <React.Fragment>
+                <ThumbUpAltIcon fontSize="small" /> &nbsp;Like
+            </React.Fragment>
+        )
     };
 
     return (
@@ -36,8 +52,8 @@ const Post = ({ post, setCurrentId }) => {
                     <Typography variant="body2" color="white" component="p">{post.message}</Typography>
                 </CardContent>
                 <CardActions>
-                    <Button size="small" color="primary" disabled={!user?.userObject} onClick={()=> dispatch(likePost(post._id))}  >
-                        <ThumbUpAltIcon fontSize='small' /> &nbsp; Like &nbsp; {post.likeCount}
+                    <Button size="small" color="primary" disabled={!user?.userObject} onClick={() => dispatch(likePost(post._id))}  >
+                        <Likes />
                     </Button>
                     <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}>
                         <DeleteIcon fontSize="small" />Delete
