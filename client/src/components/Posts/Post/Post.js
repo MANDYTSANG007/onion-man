@@ -55,9 +55,11 @@ const Post = ({ post, setCurrentId }) => {
                     <Button size="small" color="primary" disabled={!user?.userObject} onClick={() => dispatch(likePost(post._id))}  >
                         <Likes />
                     </Button>
-                    <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}>
-                        <DeleteIcon fontSize="small" />Delete
-                    </Button>
+                    {(user?.userObject?.sub === post?.creator || user?.userObject?._id === post?.creator) && (
+                        <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}>
+                            <DeleteIcon fontSize="small" />Delete
+                        </Button>
+                    )}
                 </CardActions>
             </CardMedia>
         </Card>
