@@ -9,7 +9,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
 const App = () => (
-  <GoogleOAuthProvider clientId="
+  <GoogleOAuthProvider clientId=
     <BrowserRouter>
       {/* <ThemeProvider theme={theme}> */}
       <Container sx={{ bgcolor: "secondary.main" }} maxWidth="lg">

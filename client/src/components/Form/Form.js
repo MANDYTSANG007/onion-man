@@ -5,9 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createPost, updatePost } from '../../actions/posts';
 
 const Form = ({ currentId, setCurrentId }) => {
-    const [postData, setPostData] = useState({ creator: "", title: "", message: "", selectedFile: "" });
+    const [postData, setPostData] = useState({ title: "", message: "", selectedFile: "" });
     const dispatch = useDispatch();
     const post = useSelector((state) => (currentId ? state.posts.find((p) => p._id === currentId) : null));
+    const user = JSON.parse(localStorage.getItem('profile'));
 
     useEffect(() => {
         if (post) setPostData(post);
@@ -17,30 +18,34 @@ const Form = ({ currentId, setCurrentId }) => {
         e.preventDefault();
 
         if (currentId === 0) {
-            dispatch(createPost(postData));
+            dispatch(createPost({ ...postData, name: user?.userObject?.name }));
+            clear();
         } else {
-            dispatch(updatePost(currentId, postData));
+            dispatch(updatePost(currentId, { ...postData, name: user?.userObject?.name }));
+            clear();
         }
-
-        clear();
     };
 
     const clear = () => {
         setCurrentId(0);
-        setPostData({ creator: "", title: "", message: "", selectedFile: "" })
+        setPostData({ title: "", message: "", selectedFile: "" })
+    };
+
+    if(!user?.userObject?.name) {
+        return (
+            <Paper>
+                <Typography variant="h6" align="center">
+                    Please sign in to create your own recipes and like other's recipes.
+                </Typography>
+            </Paper>
+        )
     };
 
     return (
         <Paper>
             <form autoComplete="off" noValidate onSubmit={handleSubmit}>
                 <Typography variant="h6">{currentId ? 'Editing a Recipe' : 'Creating a Recipe' }</Typography>
-                <TextField
-                    name="creator"
-                    variant="outlined"
-                    label="Creator"
-                    fullWidth
-                    value={postData.creator}
-                    onChange={(e) => setPostData({ ...postData, creator: e.target.value })} />
+            
                 <TextField
                     name="title"
                     variant="outlined"
@@ -58,8 +63,8 @@ const Form = ({ currentId, setCurrentId }) => {
                 <div>
                     <FileBase type="file" multiple={false} onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64 })} />
                 </div>
-                <Button variant="container" color="primary" size="large" type="submit" fullWidth>Submit</Button>
-                <Button variant="container" color="secondary" size="small" onClick={clear} fullWidth>Clear</Button>
+                <Button variant="contained" color="primary" size="large" type="submit" fullWidth>Submit</Button>
+                <Button variant="contained" color="secondary" size="small" onClick={clear} fullWidth>Clear</Button>
             </form>
         </Paper>
     );

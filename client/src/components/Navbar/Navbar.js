@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { AppBar, Typography, Avatar, Toolbar, Button } from '@mui/material';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import decode from 'jwt-decode';
 
 
 const Navbar = () => {
@@ -11,11 +12,13 @@ const Navbar = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    console.log(user);
-
     useEffect(() => {
         const credential = user?.credential;
         
+        if(credential) {
+            const decodedCredential = decode(credential);
+            if(decodedCredential.exp * 1000 < new Date().getTime()) logout();
+        }
         setUser(JSON.parse(localStorage.getItem('profile')));
     }, [location]);
 
@@ -33,7 +36,7 @@ const Navbar = () => {
             <Toolbar>
                 {user ? (
                     <div>
-                        <Avatar alt={user.userObject.name} src={user.userObject.imageUrl}>{user.userObject.name.charAt(0)}</Avatar>
+                        <Avatar alt={user.userObject.name} src={user.userObject.picture}>{user.userObject.name}</Avatar>
                         <Typography variant="h6">{user.userObject.name}</Typography>
                         <Button variant="contained" color="secondary" onClick={logout}>Logout</Button>
                     </div>

@@ -7,20 +7,29 @@ import Icon from './icon';
 import { useDispatch } from 'react-redux';
 import jwt_decode from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
+import { signin, signup } from '../../actions/auth';
 
+const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
 
 const Auth = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const [formData, setFormData] = useState(initialState);
     const [isSignup, setIsSignup] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
 
+        if(isSignup) {
+            dispatch(signup(formData, navigate))
+        } else {
+            dispatch(signin(formData, navigate))
+        }
     };
 
-    const handleChange = () => {
-
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name] : e.target.value })
     };
 
     const handleShowPassword = () => {
@@ -48,11 +57,11 @@ const Auth = () => {
     useEffect(() => {
         /* global google*/
         google.accounts.id.initialize({
-            client_id: 
+            client_id: "
             callback: handleCallbackResponse
         });
         google.accounts.id.prompt();
-    }, []);
+    });
 
     const googleError = (error) => {
         console.log(error);
@@ -71,7 +80,7 @@ const Auth = () => {
                         {isSignup && (
                             <React.Fragment>
                                 <Input name="firstName" label="First Name" handleChange={handleChange} autoFocus half />
-                                <Input name="lastName" label="Last Name" handleChange={handleChange} />
+                                <Input name="lastName" label="Last Name" handleChange={handleChange} half />
                             </React.Fragment>
                         )}
                         <Input name="email" label=" Email Address" handleChange={handleChange} type="email" />
