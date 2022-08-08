@@ -33,9 +33,9 @@ const Form = ({ currentId, setCurrentId }) => {
 
     if(!user?.userObject?.name) {
         return (
-            <Paper>
+            <Paper sx={{marginTop: "5%"}}>
                 <Typography variant="h6" align="center">
-                    Please sign in to create your own recipes and like other's recipes.
+                    Please sign in to add your onion recipes and like other's recipes.
                 </Typography>
             </Paper>
         )
@@ -44,9 +44,10 @@ const Form = ({ currentId, setCurrentId }) => {
     return (
         <Paper>
             <form autoComplete="off" noValidate onSubmit={handleSubmit}>
-                <Typography variant="h6">{currentId ? 'Editing a Recipe' : 'Creating a Recipe' }</Typography>
+                <Typography sx={{marginTop: "5%", padding: "5%"}} align="center" variant="h6"> {currentId ? 'Editing a Recipe' : 'Creating a Recipe' } </Typography>
             
                 <TextField
+                    sx={{ mt: 1, mb: 2}}
                     name="title"
                     variant="outlined"
                     label="Title"
@@ -54,6 +55,7 @@ const Form = ({ currentId, setCurrentId }) => {
                     value={postData.title}
                     onChange={(e) => setPostData({ ...postData, title: e.target.value })} />
                 <TextField
+                    sx={{ mt: 1, mb: 2}}
                     name="message"
                     variant="outlined"
                     label="Message"
@@ -63,8 +65,8 @@ const Form = ({ currentId, setCurrentId }) => {
                 <div>
                     <FileBase type="file" multiple={false} onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64 })} />
                 </div>
-                <Button variant="contained" color="primary" size="large" type="submit" fullWidth>Submit</Button>
-                <Button variant="contained" color="secondary" size="small" onClick={clear} fullWidth>Clear</Button>
+                <Button sx={{ mt: 2, mb: 2}}variant="contained" color="primary" size="large" type="submit" fullWidth>Submit</Button>
+                <Button sx={{ mt: 2, mb: 2}}variant="contained" color="secondary" size="large" onClick={clear} fullWidth>Clear</Button>
             </form>
         </Paper>
     );

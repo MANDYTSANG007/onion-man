@@ -22,9 +22,6 @@ const Colors = {
 const theme = createTheme({
     palette: {
         primary: {
-            main: Colors.secondary
-        },
-        secondary: {
             main: Colors.warning
         }
     }

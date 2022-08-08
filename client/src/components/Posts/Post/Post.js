@@ -35,7 +35,7 @@ const Post = ({ post, setCurrentId }) => {
     };
 
     return (
-        <Card>
+        <Card sx={{marginTop: "5%"}}>
             <CardMedia image={post.selectedFile} title={post.selectedFile} >
                 <div>
                     <Typography variant="h6" color="white"> {post.name} </Typography>
@@ -44,7 +44,7 @@ const Post = ({ post, setCurrentId }) => {
                 {(user?.userObject?.sub === post?.creator || user?.userObject?._id === post?.creator) && (
                 <div>
                     <Button style={{ color: "white" }} size="large" onClick={() => setCurrentId(post._id)}>
-                        <MoreHorizIcon fontSize="default" />
+                        <MoreHorizIcon size="large" />
                     </Button>
                 </div>
                 )}
