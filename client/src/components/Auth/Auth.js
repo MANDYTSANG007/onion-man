@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Avatar, Button, Paper, Grid, Typography, Container } from '@mui/material';
+import { Avatar, Button, Paper, Grid, Typography, Container, Toolbar } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Input from './Input';
 import { GoogleLogin } from '@react-oauth/google';
@@ -21,7 +21,7 @@ const Auth = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if(isSignup) {
+        if (isSignup) {
             dispatch(signup(formData, navigate))
         } else {
             dispatch(signin(formData, navigate))
@@ -29,7 +29,7 @@ const Auth = () => {
     };
 
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name] : e.target.value })
+        setFormData({ ...formData, [e.target.name]: e.target.value })
     };
 
     const handleShowPassword = () => {
@@ -47,9 +47,9 @@ const Auth = () => {
         const credential = response.credential;
         console.log(userObject);
         try {
-            dispatch({ type: "AUTH", data: {userObject, credential}});
+            dispatch({ type: "AUTH", data: { userObject, credential } });
             navigate('/');
-        } catch(error) {
+        } catch (error) {
             console.log(error);
         }
     };
@@ -69,14 +69,16 @@ const Auth = () => {
     };
 
     return (
-        <Container component="main" maxWidth="xs">
+        <Container align="center" component="main" maxWidth="xs">
             <Paper elevation={3}>
-                <Avatar>
-                    <LockOutlinedIcon />
-                </Avatar>
-                <Typography variant="h5"> {isSignup ? "Sign Up" : "Sign In"} </Typography>
+                <Toolbar sx={{ justifyContent: "center" }}>
+                    <Avatar >
+                        <LockOutlinedIcon />
+                    </Avatar>
+                </Toolbar>
+                <Typography variant="h5" > {isSignup ? "Sign Up" : "Sign In"} </Typography>
                 <form onSubmit={handleSubmit}>
-                    <Grid container spacing={2}>
+                    <Grid sx={{ padding: 2 }} container spacing={1}>
                         {isSignup && (
                             <React.Fragment>
                                 <Input name="firstName" label="First Name" handleChange={handleChange} autoFocus half />
@@ -88,20 +90,21 @@ const Auth = () => {
                         {isSignup && <Input name="confirmPassword" label="Repeat Password" handleChange={handleChange} type="password" />}
                     </Grid>
 
-                    <Button type="submit" fullWidth variant="contained" color="primary">
+                    <Button sx={{ mt: 1 }} type="submit" fullWidth variant="contained" color="primary">
                         {isSignup ? "Sign Up" : "Sign In"}
                     </Button>
+                    <div style={{ padding: 10, justifyContent: "center", display: "flex" }}>
+                        <GoogleLogin
+                            render={(renderProps) => (
+                                <Button color="primary" fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon />} variant="contained">Google Sign In</Button>
+                            )}
+                            onSuccess={(response) => handleCallbackResponse(response)}
+                            onError={googleError}
+                            cookiePolicy="single_host_origin"
 
-                    <GoogleLogin
-                        render={(renderProps) => (
-                            <Button color="primary" fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon />} variant="contained">Google Sign In</Button>
-                        )}
-                        onSuccess={(response) => handleCallbackResponse(response)}
-                        onError={googleError}
-                        cookiePolicy="single_host_origin"
-                    />
-
-                    <Grid container justify="flex-end">
+                        />
+                    </div>
+                    <Grid sx={{ justifyContent: "center" }} container justify="flex-end">
                         <Grid item>
                             <Button onClick={switchMode}>
                                 {isSignup ? "Already have an account? Please sign in." : "Don't have an account? Please sign up."}

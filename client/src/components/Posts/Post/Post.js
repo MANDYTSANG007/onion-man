@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Typography, CardMedia, Button, CardContent, CardActions } from '@mui/material';
+import { Card, CardHeader, Typography, CardMedia, Button, CardContent, CardActions } from '@mui/material';
 import moment from 'moment';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
@@ -35,35 +35,35 @@ const Post = ({ post, setCurrentId }) => {
     };
 
     return (
-        <Card sx={{marginTop: "5%"}}>
-            <CardMedia image={post.selectedFile} title={post.selectedFile} >
-                <div>
-                    <Typography variant="h6" color="white"> {post.name} </Typography>
-                    <Typography variant="body2" color="white"> {moment(post.createdAt).fromNow()} </Typography>
+        <Card sx={{ mt: "5%" }}>
+            <CardMedia sx={{ height: "15rem" }} image={post.selectedFile} title={post.selectedFile}></CardMedia>
+            <div style={{ backgroundColor: "purple", backgroundImage: "linear-gradient(to bottom right, purple, yellow)", opacity: "0.8" }}>
+                    <div style={{ display: "flex" }}>
+                        <Typography sx={{ml: "5%", color:"white" }}variant="h6" color="black"> {post.name} </Typography>
+                        {(user?.userObject?.sub === post?.creator || user?.userObject?._id === post?.creator) && (
+                            <div>
+                                <Button style={{ color: "black" }} size="large" onClick={() => setCurrentId(post._id)}>
+                                    <MoreHorizIcon sx={{ ml: 25 }} size="large" />
+                                </Button>
+                            </div>
+                        )}
+                    </div>
+                    <Typography sx={{ ml: "5%", mt: -1 }} variant="body2" color="black"> {moment(post.createdAt).fromNow()} </Typography>
                 </div>
+            <Typography sx={{ ml: "5%", }} gutterBottom variant="h5" component="h2">{post.title}</Typography>
+            <CardContent sx={{ p: 0, ml: "5%" }}>
+                <Typography variant="body2" color="black" component="p">{post.message}</Typography>
+            </CardContent>
+            <CardActions>
+                <Button size="small" color="secondary" disabled={!user?.userObject} onClick={() => dispatch(likePost(post._id))}  >
+                    <Likes />
+                </Button>
                 {(user?.userObject?.sub === post?.creator || user?.userObject?._id === post?.creator) && (
-                <div>
-                    <Button style={{ color: "white" }} size="large" onClick={() => setCurrentId(post._id)}>
-                        <MoreHorizIcon size="large" />
+                    <Button size="small" color="secondary" onClick={() => dispatch(deletePost(post._id))}>
+                        <DeleteIcon fontSize="small" />Delete
                     </Button>
-                </div>
                 )}
-                <Typography gutterBottom variant="h5" component="h2">{post.title}</Typography>
-
-                <CardContent>
-                    <Typography variant="body2" color="white" component="p">{post.message}</Typography>
-                </CardContent>
-                <CardActions>
-                    <Button size="small" color="primary" disabled={!user?.userObject} onClick={() => dispatch(likePost(post._id))}  >
-                        <Likes />
-                    </Button>
-                    {(user?.userObject?.sub === post?.creator || user?.userObject?._id === post?.creator) && (
-                        <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}>
-                            <DeleteIcon fontSize="small" />Delete
-                        </Button>
-                    )}
-                </CardActions>
-            </CardMedia>
+            </CardActions>
         </Card>
     );
 };
