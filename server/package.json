@@ -2,11 +2,14 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": "16.13.2"
+  },
   "main": "index.js",
   "type": "module",
   "scripts": {
     "start": "nodemon index.js",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm run build"
   },
   "keywords": [],
   "author": "Mandy Tsang <h.man.tsang@gmail.com>",
