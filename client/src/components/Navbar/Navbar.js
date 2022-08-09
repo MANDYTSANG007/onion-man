@@ -3,6 +3,7 @@ import { AppBar, Typography, Avatar, Toolbar, Button } from '@mui/material';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import decode from 'jwt-decode';
+import logo from '../../images/OnionManLogo1.png';
 
 
 const Navbar = () => {
@@ -32,10 +33,9 @@ const Navbar = () => {
         <div>
             <AppBar sx={{ flexGrow: 1, bgcolor: "primary.main" }} position="static" color="inherit">
                 <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-                    <div>
-                        <Typography component={Link} to="/" variant="h3" sx={{ flex: 1, textDecoration: "none", ml: 5 }}>Onion Man</Typography>
-                    </div>
-                    
+                        <Toolbar component={Link} to="/" sx={{maxWidth: 1}}>
+                            <img src={logo} alt="logo"/>
+                        </Toolbar>
                         {user ? (
                             <Toolbar>
                                 <Avatar sx={{mr: 1}} alt={user.userObject.name} src={user.userObject.picture}>{user.userObject.name}</Avatar>

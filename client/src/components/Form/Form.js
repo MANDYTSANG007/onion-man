@@ -35,7 +35,9 @@ const Form = ({ currentId, setCurrentId }) => {
         return (
             <Paper sx={{marginTop: "5%"}}>
                 <Typography variant="h6" align="center">
-                    Please sign in to add your onion recipes and like other's recipes.
+                    Please sign in to add your onion recipes and like other's recipes. For simplicity reasons,
+                    this site includes only dish's ingredients. Feel free to use your imagination for
+                    cooking instructions. 
                 </Typography>
             </Paper>
         )

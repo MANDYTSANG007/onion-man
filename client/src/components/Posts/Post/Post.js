@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardHeader, Typography, CardMedia, Button, CardContent, CardActions } from '@mui/material';
+import { Card, Typography, CardMedia, Button, CardContent, CardActions } from '@mui/material';
 import moment from 'moment';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
