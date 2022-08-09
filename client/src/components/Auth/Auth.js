@@ -57,7 +57,7 @@ const Auth = () => {
     useEffect(() => {
         /* global google*/
         google.accounts.id.initialize({
-            client_id: "
+            client_id: "680465063701-rjpjhcpgjusrrpfm50q6penv5b0bdpvh.apps.googleusercontent.com",
             callback: handleCallbackResponse
         });
         google.accounts.id.prompt();

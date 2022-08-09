@@ -9,7 +9,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
 const App = () => (
-  <GoogleOAuthProvider clientId="
+  <GoogleOAuthProvider clientId="680465063701-rjpjhcpgjusrrpfm50q6penv5b0bdpvh.apps.googleusercontent.com">
     <BrowserRouter>
       <ThemeProvider theme={theme}>
       <Container maxWidth="lg">
