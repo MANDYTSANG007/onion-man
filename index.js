@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 });
 
 const path = require("path");
-const publicPath = path.join(__dirname, "..", "public");
+// const publicPath = path.join(__dirname, "..", "public");
 app.use(express.static(publicPath));
 // const favicon = require("serve-favicon");
 // app.use(favicon(path.join(dirname, "build", "favicon.ico")));
@@ -32,9 +32,9 @@ app.use(express.static(publicPath));
 app.get("/", (req, res) => {
     res.send("hello world")
 })
-app.get("/*", function(request, response) {
-    response.sendFile(path.join(publicPath, "/client/build", "index.html"));
-})
+// app.get("/*", function(request, response) {
+//     response.sendFile(path.join(publicPath, "/client/build", "index.html"));
+// })
 
 //mongodb.com/cloud/atlas
 const port = process.env.PORT || 5000;
