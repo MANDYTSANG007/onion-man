@@ -29,6 +29,9 @@ app.use(express.static(publicPath));
 // app.get("/*", function(request, response) {
 //     response.sendFile(path.join(__dirname, "./client/build", "index.html"));
 // })
+app.get("/", (req, res) => {
+    res.send("hello world")
+})
 app.get("/*", function(request, response) {
     response.sendFile(path.join(publicPath, "/client/build", "index.html"));
 })
