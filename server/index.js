@@ -19,6 +19,12 @@ app.get('/', (req, res) => {
     res.send("Onion Man API")
 });
 
+const path = require("path");
+app.use(express.static(path.resolve(__dirname, "./client/build")));
+app.get("*", function(request, response) {
+    response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
+})
+
 //mongodb.com/cloud/atlas
 const PORT = process.env.PORT || 5000;
 
