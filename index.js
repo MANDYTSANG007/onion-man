@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
 
 // import path from 'path';
 // const publicPath = path.join(__dirname, "..", "public");
-app.use(express.static(publicPath));
+// app.use(express.static(publicPath));
 // const favicon = require("serve-favicon");
 // app.use(favicon(path.join(dirname, "build", "favicon.ico")));
 // app.use(express.static(path.join(__dirname, "client", "build")));
