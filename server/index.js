@@ -20,6 +20,8 @@ app.get('/', (req, res) => {
 });
 
 const path = require("path");
+const favicon = require("serve-favicon");
+app.use(favicon(path.join(dirname, "build", "favicon.ico")));
 app.use(express.static(path.resolve(__dirname, "./client/build")));
 app.get("*", function(request, response) {
     response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
