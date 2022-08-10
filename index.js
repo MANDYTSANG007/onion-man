@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
     res.send("Onion Man API")
 });
 
-const path = require("path");
+// import path from 'path';
 // const publicPath = path.join(__dirname, "..", "public");
 app.use(express.static(publicPath));
 // const favicon = require("serve-favicon");
