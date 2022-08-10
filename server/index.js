@@ -15,6 +15,10 @@ app.use(cors());
 app.use('/posts', postRoutes);
 app.use('/user', userRoutes);
 
+app.get('/', (req, res) => {
+    res.send("Onion Man API")
+});
+
 //mongodb.com/cloud/atlas
 const PORT = process.env.PORT || 5000;
 
