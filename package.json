@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "engines": {
-    "node": "16.13.2"
+    "node": "16.13.2",
+    "npm": "8.11.0"
   },
   "main": "index.js",
   "type": "module",
   "scripts": {
     "dev": "react-scripts start",
-    "start": "serve -s build",
+    "start": "nodemon index.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
