@@ -4,6 +4,7 @@ import express from 'express';
 
 const router = express.Router();
 
+// Create get posts logic
 export const getPosts = async (req, res) => {
     try {
         const postMessages = await PostMessage.find();

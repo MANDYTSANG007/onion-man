@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 
+// Create schema to define properties in MongoDB collection 
 const postSchema = mongoose.Schema ({
     title: String,
     message: String,
