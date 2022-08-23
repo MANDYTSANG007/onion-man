@@ -1,5 +1,6 @@
 import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE } from '../constants/actionTypes';
 
+// Create reducers to accept states and to prompt actions
 export default (posts = [], action) => {
     switch (action.type) {
         case FETCH_ALL:

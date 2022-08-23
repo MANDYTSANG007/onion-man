@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+// Create API calls
 const API = axios.create({ baseURL: 'https://onion-man1.herokuapp.com' });
 
 API.interceptors.request.use((req) => {

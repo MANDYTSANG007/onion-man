@@ -4,7 +4,7 @@ import express from 'express';
 
 const router = express.Router();
 
-// Create get posts logic
+// Set up get posts logic
 export const getPosts = async (req, res) => {
     try {
         const postMessages = await PostMessage.find();
@@ -14,6 +14,7 @@ export const getPosts = async (req, res) => {
     }
 };
 
+// Set up creat posts logic
 export const createPost = async (req, res) => {
     const post = req.body;
     const newPostMessage = new PostMessage({...post, creator: req.userId, createdAt: new Date().toISOString() });
@@ -26,6 +27,7 @@ export const createPost = async (req, res) => {
     }
 };
 
+// Set up update post logic
 export const updatePost = async (req, res) => {
     const { id: _id } = req.params;
     const post = req.body;
@@ -39,6 +41,7 @@ export const updatePost = async (req, res) => {
     res.json(updatedPost);
 };
 
+// Set up delete post logic
 export const deletePost = async (req, res) => {
     const { id } = req.params;
 
@@ -51,6 +54,7 @@ export const deletePost = async (req, res) => {
     res.json({ message: 'Post deleted successfully' });
 }
 
+// Set up like post logic
 export const likePost = async (req, res) => {
     const { id } = req.params;
 

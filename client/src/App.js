@@ -8,6 +8,7 @@ import Auth from './components/Auth/Auth';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
+// Set up structure of the app with Google Identity Service OAuth for authentication
 const App = () => (
   <GoogleOAuthProvider clientId="680465063701-rjpjhcpgjusrrpfm50q6penv5b0bdpvh.apps.googleusercontent.com">
     <BrowserRouter>
