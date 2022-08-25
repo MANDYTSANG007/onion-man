@@ -6,6 +6,7 @@ import { createPost, updatePost } from '../../actions/posts';
 
 const Form = ({ currentId, setCurrentId }) => {
     const [postData, setPostData] = useState({ title: "", message: "", selectedFile: "" });
+    //create a dispatch action
     const dispatch = useDispatch();
     const post = useSelector((state) => (currentId ? state.posts.find((p) => p._id === currentId) : null));
     const user = JSON.parse(localStorage.getItem('profile'));
@@ -14,6 +15,7 @@ const Form = ({ currentId, setCurrentId }) => {
         if (post) setPostData(post);
     }, [post]);
 
+    // Create submit button logic
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -26,6 +28,7 @@ const Form = ({ currentId, setCurrentId }) => {
         }
     };
 
+    // Create clear button logic
     const clear = () => {
         setCurrentId(0);
         setPostData({ title: "", message: "", selectedFile: "" })
@@ -67,8 +70,8 @@ const Form = ({ currentId, setCurrentId }) => {
                 <div>
                     <FileBase type="file" multiple={false} onDone={({ base64 }) => setPostData({ ...postData, selectedFile: base64 })} />
                 </div>
-                <Button sx={{ mt: 2, mb: 2}}variant="contained" color="primary" size="large" type="submit" fullWidth>Submit</Button>
-                <Button sx={{ mt: 2, mb: 2}}variant="contained" color="secondary" size="large" onClick={clear} fullWidth>Clear</Button>
+                <Button sx={{ mt: 2, mb: 2}} variant="contained" color="primary" size="large" type="submit" fullWidth>Submit</Button>
+                <Button sx={{ mt: 2, mb: 2}} variant="contained" color="secondary" size="large" onClick={clear} fullWidth>Clear</Button>
             </form>
         </Paper>
     );

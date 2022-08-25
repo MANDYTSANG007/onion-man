@@ -3,7 +3,7 @@ import Post from './Post/Post';
 import { useSelector } from 'react-redux';
 import { CircularProgress, Grid } from '@mui/material';
 
-
+// Create a useSelector hook to extract data from the redux store
 const Posts = ({ setCurrentId }) => {
     const posts = useSelector((state) => state.posts);
 
